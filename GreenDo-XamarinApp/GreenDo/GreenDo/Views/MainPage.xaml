@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mm="clr-namespace:MediaManager.Forms;assembly=MediaManager.Forms"
+             x:Class="GreenDo.Views.MainPage"
+             Title="{Binding Title}"
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="True">
+    <!--BackgroundImageSource="imgLogin.png">-->
+
+    <StackLayout>
+        <RelativeLayout HeightRequest="100" MinimumHeightRequest="20">
+            <Button RelativeLayout.WidthConstraint="50" 
+                    RelativeLayout.XConstraint="15" 
+                    RelativeLayout.YConstraint="15"
+                    RelativeLayout.HeightConstraint="50"
+                    BackgroundColor="White"
+                    BorderColor="Black"
+                    BorderWidth="1"
+                    CornerRadius="5"
+                    TextColor="Black"
+                    Text="Set">
+                    
+            </Button>
+            <Button RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-80}"
+                    RelativeLayout.YConstraint="15"
+                    RelativeLayout.WidthConstraint="160"
+                    BackgroundColor="#5bbe84"
+                    BorderColor="Black"
+                    BorderWidth="1"
+                    CornerRadius="15"
+                    TextColor="Black"
+                    Text="Become Active"
+                    Command="{Binding RecordVideoCommand}">
+                
+            </Button>
+            <Button RelativeLayout.WidthConstraint="50" 
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Constant=-65}" 
+                    RelativeLayout.YConstraint="15"
+                    RelativeLayout.HeightConstraint="50"
+                    BackgroundColor="White"
+                    TextColor="Black"
+                    BorderColor="Black"
+                    BorderWidth="1"
+                    CornerRadius="5"
+                    Text="Me"></Button>
+        </RelativeLayout>
+        <ListView ItemsSource="{Binding VideoNodes}" RowHeight="550">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Margin="0, 20, 0, 0">
+                            <mm:VideoView HeightRequest="400" 
+                                          AutoPlay="False"
+                                          ShowControls="True"></mm:VideoView>
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"></RowDefinition>
+                                    <RowDefinition Height="50"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding Author, StringFormat='by: \{0}'}"
+                                       HorizontalTextAlignment="Center"></Label>
+                                <Label Grid.Row="0" Grid.Column="1" Text="22-05-2020, 14:33"
+                                       HorizontalTextAlignment="Center"></Label>
+                                <Button Grid.Row="1" Grid.Column="0" Text="{Binding Hearts, StringFormat='💗 \{0}'}" 
+                                        BackgroundColor="#5bbe84"
+                                        TextColor="White"
+                                        BorderColor="Black" BorderWidth="1"
+                                        Clicked="Button_Heart_Clicked"
+                                        >
+                                    <!--Command="{Binding Path=DataContext.ReactToHeartCommand}"-->
+                                        <!--CommandParameter="{Binding}-->"
+                                        </Button>
+                                <Button Grid.Row="1" Grid.Column="1" Text="{Binding Likes, StringFormat='🌱 \{0}'}"
+                                        BackgroundColor="#5bbe84"
+                                        TextColor="White"
+                                        BorderColor="Black" BorderWidth="1"
+                                        Clicked="Button_Like_Clicked"
+                                        ></Button>
+                            </Grid>
+                        </StackLayout>                     
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>
